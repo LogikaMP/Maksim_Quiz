@@ -41,10 +41,12 @@ function showQuestion(){
 //відображаємо перше запитання
 showQuestion()
 
+let answr = []
 // обробники кліків по кнопках відповідей
 for (let i = 0; i<btn_ans.length; i++){
     btn_ans[i].addEventListener("click", function(){
         let ans = btn_ans[i].innerHTML
+        answr.push(ans)
         if(ans == qw.correct){
             console.log('COCK')
             score ++
@@ -53,7 +55,7 @@ for (let i = 0; i<btn_ans.length; i++){
             console.log('KNOCK KNOCK')
             
         }
-      img.src = qw.img
+      img.src = "2.png"
       div_img.style.display = "flex"
         anime({
               targets: ".img",
@@ -66,6 +68,8 @@ for (let i = 0; i<btn_ans.length; i++){
         div_img.style.display = "none"
          div_img.style.transform = "translate(-50%, -50%) scale(0) rotate(0deg)";
         if(q_index == questions.length){
+          answr = answr.join("/")
+          document.cookie = `answr = ${answr};max-age=86400`
             document.cookie = `score=${score};max-age=86400`
             document.cookie = `total=${questions.length};max-age=86400`
             window.location.replace("result.html")
